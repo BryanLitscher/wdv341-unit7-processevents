@@ -46,7 +46,7 @@ function validateTime( $inTime) {
 		}
 	}
 	
-}//end validateProdColor()
+}//end validateTime()
 
 
 function validateDate( $inDate ) {
@@ -54,7 +54,12 @@ function validateDate( $inDate ) {
 		return false;	//Failed validation
 	}
 	else {
-		return true;	//Passes validation	
+		$date = DateTime::createFromFormat('Y-m-d',$inDate);
+		if (!$date ){
+			return false;
+		} else {
+			return true;
+		}
 	}
-}//end validateProdSize()
+}//end validateDAte()
 ?>

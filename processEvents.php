@@ -194,8 +194,6 @@ event_time
 				}
 			}
 			echo "<h4>Recaptcha</h4> ". "\n" ;
-			//print_r($recaptcha);
-			//echo $recaptcha->success;
 			if ( $recaptcha->success){
 				foreach($recaptcha as $x => $x_value) {
 					echo $x . " = " . $x_value  ;
