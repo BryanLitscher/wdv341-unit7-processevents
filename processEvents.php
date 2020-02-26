@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 		
 		if( !validateTime($eventTime) ) {
 			$valid_form = false;
-			$time_errMsg = "Please enter a valid time";
+			$time_errMsg = "Please enter a valid time<br /> In older browsers, 24 hour HH:MM including leading zeroes";
 		}		
 		if( !validateDate($eventDate) ) {
 			$valid_form = false;
-			$date_errMsg = "Please enter a valid date";
+			$date_errMsg = "Please enter a valid date<br />In older browsers, YYYY-MM-DD including leading zeroes";
 		}
 		if( !validateName($eventName) ) {
 			$valid_form = false;
@@ -162,14 +162,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 			<p>
 				<label for="event_date">Event Date</lable>
 				<input type="date" id="event_date" name="event_date" value="<?php echo $eventDate?>">
-				<p>In older browsers, YYYY-MM-DD including leading zeroes</p>
-				<p class='errmessage'><?php echo $date_errMsg ?></p>
+				<p></p>
+				<p class='errmessage'><?php echo $date_errMsg ;?></p>
 			</p>
 			<p>
 				<label for="event_time">Event Time</lable>
 				<input type="time" id="event_time" name="event_time" value="<?php echo $eventTime?>">
-				<p>In older browsers, 24 hour HH:MM including leading zeroes</p>
-				<p class='errmessage'><?php echo $time_errMsg ?></p>
+				<p class='errmessage'><?php echo $time_errMsg ;?></p>
 			</p>
 
 			<input type="hidden" name="recaptcha_response" id="recaptchaResponse">
