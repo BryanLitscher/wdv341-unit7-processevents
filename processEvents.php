@@ -51,11 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 			$valid_form = false;
 			$presenter_errMsg = "Please enter a valid presenter";
 		}
+		//This logic is not actually validating the recaptcha response.
+		//The success field only indicates that the recaptcha response was
+		//completed successfully.  The score field is used to determine if 
+		//Google thinks that the form was submitted by a robot.
 		if ( $recaptcha->success){
-			//foreach($recaptcha as $x => $x_value) {
-			//	echo $x . " = " . $x_value  ;
-			//	echo "<br>" . "\n";
-			//}
+
 		}else{
 			$valid_form = false;
 			$submit_errMsg = "Please resubmit.<br />";
@@ -115,15 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 
 <!DOCTYPE html>
 
-
-<!--
-event_id
-event_name
-event_description
-event_presenter
-event_date
-event_time
--->
 <html lang="en">
 
 	<head>
@@ -170,11 +162,13 @@ event_time
 			<p>
 				<label for="event_date">Event Date</lable>
 				<input type="date" id="event_date" name="event_date" value="<?php echo $eventDate?>">
+				<p>In older browsers, YYYY-MM-DD including leading zeroes</p>
 				<p class='errmessage'><?php echo $date_errMsg ?></p>
 			</p>
 			<p>
 				<label for="event_time">Event Time</lable>
 				<input type="time" id="event_time" name="event_time" value="<?php echo $eventTime?>">
+				<p>In older browsers, 24 hour HH:MM including leading zeroes</p>
 				<p class='errmessage'><?php echo $time_errMsg ?></p>
 			</p>
 

@@ -41,8 +41,12 @@ function validateTime( $inTime) {
 		$time = DateTime::createFromFormat('H:i', $inTime);
 		if (!$time){
 			return false;;
-		}else{
-			return true;	//Passes validation	
+		}else{			
+			if ( $time->format('H:i') == $inTime ) {
+				return True;
+			}else{
+				return false;
+			}
 		}
 	}
 	
@@ -52,13 +56,16 @@ function validateTime( $inTime) {
 function validateDate( $inDate ) {
 	if( empty($inDate) ) {
 		return false;	//Failed validation
-	}
-	else {
+	}else {
 		$date = DateTime::createFromFormat('Y-m-d',$inDate);
 		if (!$date ){
 			return false;
 		} else {
-			return true;
+			if ( $date->format('Y-m-d') == $inDate ) {
+				return True;
+			}else{
+				return false;
+			}
 		}
 	}
 }//end validateDAte()
