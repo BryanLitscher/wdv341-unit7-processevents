@@ -8,7 +8,7 @@ $keys = parse_ini_file('config.ini');
 $reCaptchaSiteKey =  $keys["Sitekey"] ;
 $reCaptchaSecretkey =   $keys["Secretkey"];
 
-$eventName=$eventDescription=$eventPresenter=$eventDate=$eventTime="";
+$eventName=$eventDescription=$eventPresenter=$eventDate=$eventTime=$successMessage="";
 $time_errMsg=$date_errMsg=$name_errMsg=$description_errMsg=$presenter_errMsg=$submit_errMsg="";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
@@ -102,7 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 			$stmt->bindParam(':eventTime', $eventTime);
 
 			//Execute the prepared statement
-			if($stmt->execute()){echo "";}
+			if($stmt->execute()){
+				$successMessage="Event $eventName recorded.  Enter next event.";
+				$eventName=$eventDescription=$eventPresenter=$eventDate=$eventTime="";
+			}
 		}
 	}
 	catch(PDOException $e){
@@ -142,8 +145,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 	</head>
 
 	<body>
-
-		<form id="eventinput_form" name="eventinput" method="post">
+		<p><?php echo $successMessage?></P>
+		<form id="eventinput_form" name="eventinput" method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
 			<p>
 				<label for="event_name">Event Name</lable>
 				<input id="event_name" name="event_name" value="<?php echo $eventName?>">
